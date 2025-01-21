@@ -17,7 +17,7 @@ class Category
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
-    // test
+
 
     /**
      * @var Collection<int, Expenses>
