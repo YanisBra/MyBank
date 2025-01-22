@@ -1,0 +1,28 @@
+# nelmio_cors:
+#     defaults:
+#         origin_regex: true
+#         allow_origin: ['%env(CORS_ALLOW_ORIGIN)%']
+#         allow_methods: ['GET', 'OPTIONS', 'POST', 'PUT', 'PATCH', 'DELETE']
+#         allow_headers: ['Content-Type', 'Authorization']
+#         expose_headers: ['Link']
+#         max_age: 3600
+#     paths:
+#         '^/': null 
+
+
+nelmio_cors:
+    defaults:
+        origin_regex: true
+        allow_origin: ['%env(CORS_ALLOW_ORIGIN)%']
+        allow_methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+        allow_headers: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin', 'Access-Control-Allow-Credentials']
+        expose_headers: ['Content-Disposition']
+        max_age: 3600
+    paths:
+        '^/api/':
+            allow_origin: ['http://localhost:3000']  # Adjust this to match the URL of your React app
+            allow_methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS']
+            allow_headers: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin', 'Access-Control-Allow-Credentials']
+            max_age: 3600
+            hosts: ['^api\.']
+            allow_credentials: true
