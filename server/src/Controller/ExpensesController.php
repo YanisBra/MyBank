@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Expenses;
-use App\Entity\Category;
+use App\Entity\Categories;
 use App\Form\ExpensesType;
 use App\Repository\ExpensesRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -57,8 +57,8 @@ final class ExpensesController extends AbstractController
         $expense->setAmount($data['amount']);
         $expense->setDateExpense(new \DateTimeImmutable($data['date_expense']));
         $expense->setDescription($data['description']);
-        $category = $entityManager->getRepository(Category::class)->find($data['category_id']);
-        $expense->setCategory($category);
+        $categories = $entityManager->getRepository(Categories::class)->find($data['categories_id']);
+        $expense->setCategories($categories);
 
         $entityManager->persist($expense);
         $entityManager->flush();
@@ -108,9 +108,9 @@ public function edit(Request $request, Expenses $expense, EntityManagerInterface
     if (isset($data['description'])) {
         $expense->setDescription($data['description']);
     }
-    if (isset($data['category_id'])) {
-        $category = $entityManager->getRepository(Category::class)->find($data['category_id']);
-        $expense->setCategory($category);
+    if (isset($data['categories_id'])) {
+        $categories = $entityManager->getRepository(Categories::class)->find($data['categories_id']);
+        $expense->setCategories($categories);
     }
 
     // Enregistrer les modifications dans la base de données

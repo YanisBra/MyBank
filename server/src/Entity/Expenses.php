@@ -24,7 +24,7 @@
 //     private ?string $description = null;
 
 //     #[ORM\ManyToOne(inversedBy: 'expenses')]
-//     private ?Category $category = null;
+//     private ?Categories $categories = null;
 
 //     public function getId(): ?int
 //     {
@@ -67,14 +67,14 @@
 //         return $this;
 //     }
 
-//     public function getCategory(): ?Category
+//     public function getCategories(): ?Categories
 //     {
-//         return $this->category;
+//         return $this->categories;
 //     }
 
-//     public function setCategory(?Category $category): static
+//     public function setCategories(?Categories $categories): static
 //     {
-//         $this->category = $category;
+//         $this->categories = $categories;
 
 //         return $this;
 //     }
@@ -110,7 +110,7 @@ class Expenses
 
     #[ORM\ManyToOne(inversedBy: 'expenses')]
     #[Groups(['expense:read'])]
-    private ?Category $category = null;
+    private ?Categories $categories = null;
 
         public function getId(): ?int
     {
@@ -153,14 +153,14 @@ class Expenses
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getCategories(): ?Categories
     {
-        return $this->category;
+        return $this->categories;
     }
 
-    public function setCategory(?Category $category): static
+    public function setCategories(?Categories $categories): static
     {
-        $this->category = $category;
+        $this->categories = $categories;
 
         return $this;
     }

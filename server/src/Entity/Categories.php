@@ -2,13 +2,13 @@
 
 // namespace App\Entity;
 
-// use App\Repository\CategoryRepository;
+// use App\Repository\CategoriesRepository;
 // use Doctrine\Common\Collections\ArrayCollection;
 // use Doctrine\Common\Collections\Collection;
 // use Doctrine\ORM\Mapping as ORM;
 
-// #[ORM\Entity(repositoryClass: CategoryRepository::class)]
-// class Category
+// #[ORM\Entity(repositoryClass: CategoriesRepository::class)]
+// class Categories
 // {
 //     #[ORM\Id]
 //     #[ORM\GeneratedValue]
@@ -22,7 +22,7 @@
 //     /**
 //      * @var Collection<int, Expenses>
 //      */
-//     #[ORM\OneToMany(targetEntity: Expenses::class, mappedBy: 'category')]
+//     #[ORM\OneToMany(targetEntity: Expenses::class, mappedBy: 'categories')]
 //     private Collection $expenses;
 
 //     public function __construct()
@@ -59,7 +59,7 @@
 //     {
 //         if (!$this->expenses->contains($expense)) {
 //             $this->expenses->add($expense);
-//             $expense->setCategory($this);
+//             $expense->setCategories($this);
 //         }
 
 //         return $this;
@@ -69,8 +69,8 @@
 //     {
 //         if ($this->expenses->removeElement($expense)) {
 //             // set the owning side to null (unless already changed)
-//             if ($expense->getCategory() === $this) {
-//                 $expense->setCategory(null);
+//             if ($expense->getCategories() === $this) {
+//                 $expense->setCategories(null);
 //             }
 //         }
 
@@ -80,30 +80,30 @@
 
  namespace App\Entity;
 
-use App\Repository\CategoryRepository;
+use App\Repository\CategoriesRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
 
-#[ORM\Entity(repositoryClass: CategoryRepository::class)]
-class Category
+#[ORM\Entity(repositoryClass: CategoriesRepository::class)]
+class Categories
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['category:read'])]
+    #[Groups(['categories:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['category:read'])]
+    #[Groups(['categories:read'])]
     private ?string $title = null;
 
     /**
      * @var Collection<int, Expenses>
      */
-    #[ORM\OneToMany(targetEntity: Expenses::class, mappedBy: 'category')]
-    #[Groups(['category:read'])]
+    #[ORM\OneToMany(targetEntity: Expenses::class, mappedBy: 'categories')]
+    #[Groups(['categories:read'])]
     private Collection $expenses;
 
     public function __construct()
@@ -140,7 +140,7 @@ class Category
     {
         if (!$this->expenses->contains($expense)) {
             $this->expenses->add($expense);
-            $expense->setCategory($this);
+            $expense->setCategories($this);
         }
 
         return $this;
@@ -149,8 +149,8 @@ class Category
     public function removeExpense(Expenses $expense): static
     {
         if ($this->expenses->removeElement($expense)) {
-            if ($expense->getCategory() === $this) {
-                $expense->setCategory(null);
+            if ($expense->getCategories() === $this) {
+                $expense->setCategories(null);
             }
         }
 
